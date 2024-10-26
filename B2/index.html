@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Timer</title>
+</head>
+<body>
+    <div id="timer">000:00</div>
+    <button onclick="startTimer()">Mulai</button>
+    <button onclick="stopTimer()">Berhenti</button>
+    <button onclick="resetTimer()">Reset</button>
+    <script>
+        let timer;
+        let seconds = 0;
+        let centiseconds = 0;
+        
+        function updateTimer() {
+            document.getElementById("timer").textContent = `${seconds.toString().padStart(3, '0')}:${centiseconds.toString().padStart(2, '0')}`;
+            centiseconds++;
+            if (centiseconds === 100) { seconds++; centiseconds = 0; }
+        }
+        
+        function startTimer() { if (!timer) timer = setInterval(updateTimer, 10); }
+        function stopTimer() { clearInterval(timer); timer = null; }
+        function resetTimer() { stopTimer(); seconds = 0; centiseconds = 0; updateTimer(); }
+    </script>
+</body>
+</html>
